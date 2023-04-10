@@ -4,7 +4,7 @@
 
 ![Badge Linguagem](http://img.shields.io/static/v1?label=LINGUAGEM&message=PYTHON&color=informational&style=plastic)
 ![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=yellowgreen&style=plastic)
-
+![GitHub last commit](https://img.shields.io/github/last-commit/IFRN-ExampleClasses/2023.1-ProgRedes?label=%C3%9ALTIMA%20ATUALIZA%C3%87%C3%83O&style=plastic)
 <hr/>
 
 
