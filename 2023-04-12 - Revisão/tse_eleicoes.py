@@ -10,8 +10,8 @@
 
 
     Pede-se que seja desenvolvido um programa que solicite ao usuário o 
-    tipo de eleição (estadual, nacional) e o cargo eletivo e o programa 
-    deverá montar um dicionário {k:v} no seguinte formato:
+    ano da eleição, tipo de eleição (estadual, nacional) e o cargo eletivo 
+    e o programa  deverá montar um dicionário {k:v} no seguinte formato:
     {
         num_candidato: { 'nome ': nome_candidato, 'partido': nome_partido, 
                          'votos': quantidade_votos, 
