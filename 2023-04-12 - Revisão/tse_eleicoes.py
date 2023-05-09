@@ -35,7 +35,9 @@
 
 import requests
 
-url = 'https://resultados.tse.jus.br/oficial/ele2022/544/dados-simplificados/br/br-c0001-e000544-r.json'
+url  = 'https://resultados.tse.jus.br/oficial/'
+url += 'ele2022/544/dados-simplificados/br/'
+url += 'br-c0001-e000544-r.json'
 
 dados_retorno = requests.get(url).json()
 
