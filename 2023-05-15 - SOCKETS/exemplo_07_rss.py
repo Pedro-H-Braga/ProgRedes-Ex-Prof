@@ -42,11 +42,9 @@ if (posicao_inicial == -1):
 # Parsear o conteúdo do feed RSS
 rss_content = retorno_noticias[posicao_inicial:posicao_final+6]
 
-'''
 file_output = open('saida.txt', 'w')
 file_output.write(rss_content)
 file_output.close()
-'''
 
 try:
     # Montando uma árvore com os elementos do XML de retorno

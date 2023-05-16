@@ -13,7 +13,7 @@ sock_img.sendall(url_request.encode())
 
 print('\nBaixando a imagem...')
 # Montado a variável que armazenará os dados de retorno
-data_ret = ''.encode()
+data_ret = b''
 while True:
     data = sock_img.recv(buffer_size)
     if not data: break
