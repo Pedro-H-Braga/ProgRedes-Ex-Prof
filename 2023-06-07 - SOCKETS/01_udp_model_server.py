@@ -12,8 +12,8 @@ udp_socket.bind(('', SOCKET_PORT))
 try:
     while True:
         # Recebendo os dados do cliente
-        mensagem, cliente = udp_socket.recvfrom(BUFFER_SIZE)
-        print(cliente, mensagem.decode(CODE_PAGE))
+        mensagem, ip_cliente = udp_socket.recvfrom(BUFFER_SIZE)
+        print(f'O cliente {ip_cliente} enviou: {mensagem.decode(CODE_PAGE)}')
 except:
     print(f'\nERRO: {sys.exc_info()[0]}')
 finally:    
