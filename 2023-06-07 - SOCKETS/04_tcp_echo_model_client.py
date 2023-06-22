@@ -5,7 +5,7 @@ from socket_constants import *
 tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Ligando o socket a porta
-tcp_socket.connect((HOST_SERVER, SOCKET_PORTPORT))
+tcp_socket.connect((HOST_SERVER, SOCKET_PORT))
 
 while True:
     mensagem = input('Digite a mensagem: ')
