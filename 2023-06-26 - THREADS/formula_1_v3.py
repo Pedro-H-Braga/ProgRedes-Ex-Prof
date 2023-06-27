@@ -1,9 +1,14 @@
-import sys, os, time, platform, random, threading
+import sys, os, time, platform, random, threading, logging, logging.config
 
-MAX_VOLTAS = 10
-
-lstPilotos = ['PENELOPE CHARMOSA','DICK VIGARISTA   ', 
-              'PETER PERFEITO   ','RUFUS LENHADOR   ']
+#------------------------------------------------------------
+MAX_VOLTAS  = 10
+LST_PILOTOS = ['PENELOPE CHARMOSA','DICK VIGARISTA   ', 
+               'PETER PERFEITO   ','RUFUS LENHADOR   ']
+QT_PILOTOS  = len(LST_PILOTOS)
+#------------------------------------------------------------
+               
+logging.config.fileConfig('log_config.ini')
+logger = logging.getLogger('user')
 
 lstPodium = []
 
@@ -13,14 +18,15 @@ def carro_f1(nomePiloto: str):
     for voltas in range(1, MAX_VOLTAS+1):
         velocidadeCarro = random.randint(50,100)
         time.sleep(1/velocidadeCarro)
-        msg = f'\t\tPiloto: {nomePiloto} ..... volta {voltas:>2} em {1/velocidadeCarro:.5f} segundos'
+        msg = f'Piloto: {nomePiloto} ..... volta {voltas:>2} em {1/velocidadeCarro:.5f} segundos'
         if voltas < 10:
-            print(msg)
+            print(f'\t\t{msg}')
+            logger.info(msg)
         else:
-            print(f'{msg} ..... RECEBEU BANDEIRADA')
+            print(f'\t\t{msg} ..... RECEBEU BANDEIRADA')
+            logger.info(f'{msg} ..... RECEBEU BANDEIRADA')
     t_fim = time.time()
     d_tempo = t_fim - t_inicio
-    #print(f'\t{nomePiloto} concluiu a prova em {d_tempo:.5f} segundos')
     if voltas == 10: lstPodium.append([nomePiloto, round(d_tempo,5)])
 #------------------------------------------------------------
 
@@ -35,17 +41,17 @@ try:
     # Instanciar as THREADS na memória (solicitar recursos ao SO)
     print('\nGRID DE LARGADA...')
     threadsPilotos = list()
-    for i in range(len(lstPilotos)):
-        piloto = threading.Thread(target=carro_f1, args=[lstPilotos[i]])
+    for i in range(QT_PILOTOS):
+        piloto = threading.Thread(target=carro_f1, args=[LST_PILOTOS[i]])
         threadsPilotos.append(piloto)
-        print(f'\t\tPiloto: {lstPilotos[i]} ..... Posição {i+1}')
-
-    print('\nÉ DADA A LARGADA...\n')
-    for thread in threadsPilotos: thread.start()
-    for thread in threadsPilotos: thread.join()
+        print(f'\t\tPiloto: {LST_PILOTOS[i]} ..... Posição {i+1}')
 except:
     print(f'\nA CORRIDA NÃO PODE SER INICIADA... {sys.exc_info()[0]}')
 else:
+    print('\nÉ DADA A LARGADA...\n')
+    for thread in threadsPilotos: thread.start()
+    for thread in threadsPilotos: thread.join()
+
     print('\nBANDEIRA QUADRICULADA AGITADA...')
     print('\nPODIUM...')
     for podium in lstPodium:
