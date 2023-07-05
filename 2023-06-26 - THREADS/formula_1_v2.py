@@ -5,7 +5,7 @@ MAX_VOLTAS = 10
 lstPilotos = ['PENELOPE CHARMOSA','DICK VIGARISTA   ', 
               'PETER PERFEITO   ','RUFUS LENHADOR   ']
 
-lstPodium = []
+lstPodium = list()
 
 #------------------------------------------------------------
 def carro_f1(nomePiloto: str):
@@ -14,14 +14,14 @@ def carro_f1(nomePiloto: str):
         velocidadeCarro = random.randint(50,100)
         time.sleep(1/velocidadeCarro)
         msg = f'\t\tPiloto: {nomePiloto} ..... volta {voltas:>2} em {1/velocidadeCarro:.5f} segundos'
-        if voltas < 10:
+        if voltas < MAX_VOLTAS:
             print(msg)
         else:
             print(f'{msg} ..... RECEBEU BANDEIRADA')
     t_fim = time.time()
     d_tempo = t_fim - t_inicio
     #print(f'\t{nomePiloto} concluiu a prova em {d_tempo:.5f} segundos')
-    if voltas == 10: lstPodium.append([nomePiloto, round(d_tempo,5)])
+    lstPodium.append([nomePiloto, round(d_tempo,5)])
 #------------------------------------------------------------
 
 if platform.system() == 'Windows':

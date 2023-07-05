@@ -1,16 +1,18 @@
+#https://docs.python.org/3/library/logging.html
 import sys, os, time, platform, random, threading, logging, logging.config
 
 #------------------------------------------------------------
-MAX_VOLTAS  = 10
-LST_PILOTOS = ['PENELOPE CHARMOSA','DICK VIGARISTA   ', 
-               'PETER PERFEITO   ','RUFUS LENHADOR   ']
+MAX_VOLTAS  = 100
+LST_PILOTOS = ['PENELOPE CHARMOSA', 'DICK VIGARISTA   ', 
+               'PETER PERFEITO   ', 'RUFUS LENHADOR   ']
 QT_PILOTOS  = len(LST_PILOTOS)
-#------------------------------------------------------------
-               
-logging.config.fileConfig('log_config.ini')
-logger = logging.getLogger('user')
 
-lstPodium = []
+#------------------------------------------------------------
+logging.config.fileConfig('log_config.ini')
+loggerPiloto  = logging.getLogger('piloto')
+loggerChegada = logging.getLogger('chegada')
+
+lstPodium = list()
 
 #------------------------------------------------------------
 def carro_f1(nomePiloto: str):
@@ -19,15 +21,15 @@ def carro_f1(nomePiloto: str):
         velocidadeCarro = random.randint(50,100)
         time.sleep(1/velocidadeCarro)
         msg = f'Piloto: {nomePiloto} ..... volta {voltas:>2} em {1/velocidadeCarro:.5f} segundos'
-        if voltas < 10:
+        if voltas < MAX_VOLTAS:
             print(f'\t\t{msg}')
-            logger.info(msg)
+            loggerPiloto.info(msg)
         else:
             print(f'\t\t{msg} ..... RECEBEU BANDEIRADA')
-            logger.info(f'{msg} ..... RECEBEU BANDEIRADA')
+            loggerChegada.warning(f'{msg} ..... RECEBEU BANDEIRADA')
     t_fim = time.time()
     d_tempo = t_fim - t_inicio
-    if voltas == 10: lstPodium.append([nomePiloto, round(d_tempo,5)])
+    lstPodium.append([nomePiloto, round(d_tempo,5)])
 #------------------------------------------------------------
 
 if platform.system() == 'Windows':
@@ -53,6 +55,7 @@ else:
     for thread in threadsPilotos: thread.join()
 
     print('\nBANDEIRA QUADRICULADA AGITADA...')
+    
     print('\nPODIUM...')
     for podium in lstPodium:
         print(f'\t{podium[0]} (Tempo de Corrida: {podium[1]})')
